@@ -1,0 +1,238 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Cell Animations</title>
+
+        <style>
+            .table{
+
+            }
+
+            .table .row{
+                margin-bottom:3px;
+                -webkit-perspective: 600px;
+            }
+
+            .table .row:after{
+                content:"";
+                clear:both;
+                display:table;
+            }
+
+            .table .cell{
+                float:left;
+                width:50px;
+                height:20px;
+                margin: 0 0 0 3px;
+                /*opacity:0;*/
+                -webkit-transition: ease-out .3s all;
+                -webkit-transform-style: preserve-3d;
+                -webkit-transform-origin: center center;
+            }
+
+            .table .cell:first-child{
+                margin-left:0;
+            }
+
+            .table .cell.x2{
+                width: 103px;
+            }
+
+            .table .cell.x3{
+                width:156px;
+            }
+
+            .table .cell .front,
+            .table .cell .back{
+                position:absolute;
+                width:100%;
+                height:100%;
+                -webkit-transition: ease-out .2s all;
+                -webkit-backface-visibility:hidden;
+                -webkit-transform-origin: center center;
+            }
+
+            .table .cell .front{
+                background-color:dodgerblue;
+            }
+
+            .table .cell .back{
+                opacity:0;
+                background-color:orangered;
+                -webkit-transform: rotateX(180deg);
+            }
+
+            .table .cell.fade .front{
+                opacity:0;
+            }
+
+            .table .cell.fade .back{
+                opacity:1;
+            }
+
+            .table .cell.fade{
+                -webkit-transform: rotateX(180deg);
+            }
+
+        </style>
+
+
+    </head>
+    <body>
+        <button id="reset">Reset</button>
+        <br>
+        <button class="animate" data-pattern="random">Random</button>
+        <br>
+        <button class="animate" data-pattern="l2rt2b">Left to Right, Top to Bottom</button>
+        <button class="animate" data-pattern="l2rb2t">Left to Right, Bottom to Top</button>
+        <br>
+        <button class="animate" data-pattern="r2lt2b">Right to Left, Top to Bottom</button>
+        <button class="animate" data-pattern="r2lb2t">Right to Left, Bottom to Top</button>
+        <br>
+        <button class="animate" data-pattern="t2bl2r">Top to Bottom, Left to Right</button>
+        <button class="animate" data-pattern="t2br2l">Top to Bottom, Right to Left</button>
+        <br>
+        <button class="animate" data-pattern="b2tl2r">Bottom to Top, Left to Right</button>
+        <button class="animate" data-pattern="b2tr2l">Bottom to Top, Right to Left</button>
+        <br>
+        <button class="animate" data-pattern="tl2brCorner">Top Left Corner</button>
+        <button class="animate" data-pattern="tr2blCorner">Top Right Corner</button>
+        <button class="animate" data-pattern="bl2trCorner">Bottom Left Corner</button>
+        <button class="animate" data-pattern="br2tlCorner">Bottom Right Corner</button>
+        <br>
+        <button class="animate" data-pattern="t2bRows">Rows Top</button>
+        <button class="animate" data-pattern="b2tRows">Rows Bottom</button>
+        <button class="animate" data-pattern="l2rColumns">Columns Left</button>
+        <button class="animate" data-pattern="r2lColumns">Columns Right</button>
+        <br>
+        <button class="animate" data-pattern="expandRows">Expand Rows</button>
+        <button class="animate" data-pattern="collapseRows">Collapse Rows</button>
+        <button class="animate" data-pattern="expandColumns">Expand Columns</button>
+        <button class="animate" data-pattern="collapseColumns">Collapse Columns</button>
+
+        <br><br>
+
+        <div class="table">
+            <div class="row">
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+            </div>
+            <div class="row">
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+            </div>
+            <div class="row">
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+            </div>
+            <div class="row">
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+            </div>
+            <div class="row">
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+            </div>
+            <div class="row">
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+            </div>
+            <div class="row">
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+                <div class="cell"><div class="front"></div><div class="back"></div></div>
+            </div>
+        </div>
+
+
+
+        <script src="jquery.js"></script>
+        <script src="chronomate.js"></script>
+        <script>
+            var $table = $(".table"),
+                anim;
+
+            $table.chronomate({
+                delay: 75,
+                jsAnimation: function(cell){
+                    this.addClass("fade");
+                }
+            })
+
+            anim = $table.data("CellAnimation");
+
+            $("#reset").on("click", function(){
+                anim.animate("instant", function(cell){
+                    this.removeClass("fade");
+                });
+            });
+
+            $(".animate").on("click", function(){
+                anim.animate($(this).data("pattern"));
+            });
+        </script>
+    </body>
+</html>
