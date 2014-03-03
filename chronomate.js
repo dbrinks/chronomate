@@ -3,13 +3,6 @@
     "use strict";
 
 
-    // options
-    //
-    // type: "1d" or "2d".  Default "1d"
-    //
-    // rows: selector string
-    // columns: selector string.  Only used in 2d
-
     var Chronomate = function($el, options){
         this.$el = $el;
         this.op = options;
@@ -55,22 +48,10 @@
         },
 
         animate: function(pattern, animation){
-            Animator.animate(pattern, this.getAnimationParameters(animation));
+            this.setUpTimeouts(pattern, this.getAnimationParameters(animation));
         },
 
-        getAnimationParameters: function(animation){
-            return {
-                matrix: this.matrix,
-                bounds: this.bounds,
-                delay: this.op.delay,
-                callback: animation || this.op.jsAnimation
-            }
-        }
-    };
-
-
-    var Animator = {
-        animate: function(pattern, params){
+        setUpTimeouts: function(pattern, params){
             var delayFunction = $.chronomate.delayFunctions[pattern],
                 animationParameters = [params.delay, params.bounds.rows, params.bounds.cols],
                 matrix = params.matrix;
@@ -83,6 +64,15 @@
 
                     setTimeout(animate, delayFunction.apply({row: r, col: c}, animationParameters));
                 }
+            }
+        },
+
+        getAnimationParameters: function(animation){
+            return {
+                matrix: this.matrix,
+                bounds: this.bounds,
+                delay: this.op.delay,
+                callback: animation || this.op.jsAnimation
             }
         }
     };
@@ -166,13 +156,15 @@
                 return delay * Math.abs(this.row - Math.floor(rowCount/2));
             },
             collapseRows: function(delay, rowCount, colCount){
-                return delay * (rowCount - 1 - Math.abs(this.row - Math.floor(rowCount/2)));
+                var halfRows = Math.floor(rowCount/2)
+                return delay * (halfRows - Math.abs(this.row - halfRows));
             },
             expandColumns: function(delay, rowCount, colCount){
                 return delay * Math.abs(this.col - Math.floor(colCount/2));
             },
             collapseColumns: function(delay, rowCount, colCount){
-                return delay * (colCount - 1 - Math.abs(this.col - Math.floor(colCount/2)));
+                var halfCols = Math.floor(colCount/2);
+                return delay * (halfCols - Math.abs(this.col - halfCols));
             }
         }
     };
